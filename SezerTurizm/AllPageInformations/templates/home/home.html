@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>About Us - Sezer and Sevval</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  {% for section in page_sections %}
+  <section id="{{ section.slug }}" class="col-12 mt-4 px-2" style="{% if section.background_image %}background: url('{{ section.background_image.url }}') no-repeat center center; background-size: cover;{% else %}background-color: {{ section.background_color }};{% endif %} color: {{ section.text_color }}; opacity: 0.9;">
+    <h2 style="color: {{ section.title_color }};">{{ section.title }}</h2>
+  
+    <div class="section-content" style="opacity: 1;"> <!-- Ensure the text is fully opaque -->
+      {{ section.content|safe }}
+    </div>
+    
+    <div class="section-images mt-3">
+      {% for image in section.images.all %}
+      <figure class="figure" style="opacity: 0.7;">
+        <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="figure-img img-fluid rounded" style="width: 100%; object-fit: cover;">
+        <figcaption class="figure-caption">{{ image.caption }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+
+    <!-- Relative positioning context for the video -->
+    <div class="section-videos mt-3 position-relative">
+      {% for video in section.videos.all %}
+      <!-- Absolute positioning for the video -->
+      <div class="embed-responsive embed-responsive-16by9 position-absolute" style="right: 0; bottom: 0;">
+        <iframe class="embed-responsive-item" src="{{ video.video_url }}" allowfullscreen></iframe>
+      </div>
+      <div class="video-caption mt-2">{{ video.caption }}</div>
+      {% endfor %}
+    </div>
+    
+    <div class="section-skills mt-3">
+      {% for skill in section.skills.all %}
+      <div class="progress" style="height: 1rem;">
+        <div class="progress-bar" role="progressbar" style="width: {{ skill.proficiency }}%;" aria-valuenow="{{ skill.proficiency }}" aria-valuemin="0" aria-valuemax="100">{{ skill.name }}</div>
+      </div>
+      <div class="skill-description mt-2">{{ skill.description }}</div>
+      {% endfor %}
+    </div>
+
+  </section>
+  {% endfor %}
+  
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% load i18n %}
+<footer class="bg-dark text-white mt-5">
+    <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap">
+        <div class="d-flex flex-column align-items-start">
+            {% if random_message %}
+            <p class="mb-1 random-message" aria-label="{% trans 'Random Message' %}" style="color: inherit;">
+                <span class="quote-color">“</span>{{ random_message }}<span class="quote-color">”</span>
+            </p>
+        {% endif %}
+        
+            <p class="mb-0 copyright-text" aria-label="{% trans 'Footer Text' %}">
+                {{ base_footer.copyright_text|default:"&copy; 2021 Sezer Turizm. All rights reserved." }}
+            </p>
+        </div>
+
+        <div class="d-flex social-media-links" aria-label="{% trans 'Social Media Links' %}">
+            {% for link in social_media_links %}
+                <a href="{{ link.url }}" class="text-white me-3 d-flex align-items-center" target="_blank" rel="noopener noreferrer">
+                    <i class="{{ link.platform.icon_class }}" aria-hidden="true"></i>{{ link.platform.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <style>
+        .random-message {
+            font-size: 0.8em;
+            font-style: italic;
+            width: fit-content;
+        }
+
+        .quote-color {
+            color: #FF5733;  /* Change this color as per your requirement */
+        }
+
+        .copyright-text {
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .social-media-links a {
+            font-size: 1em;
+        }
+    </style>
+</footer>

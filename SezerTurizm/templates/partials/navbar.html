@@ -1,0 +1,44 @@
+{% load i18n %}
+<style>
+  .navbar-brand-margin {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Brand -->
+  <a class="navbar-brand navbar-brand-margin" href="{{ navbar_brand.link }}">{{ navbar_brand.name }}</a>
+
+  <!-- Toggler Button -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar items -->
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      {% for section in sections %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="{{ section.name }}-dropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ section.name }}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="{{ section.name }}-dropdown">
+          <!-- Home Page section that directs to the section page -->
+          <li><a class="dropdown-item" href="{{ section.link }}">Home Page</a></li>
+          
+          <!-- Divider -->
+          <li><hr class="dropdown-divider"></li>
+          
+          <!-- Subsections -->
+          {% for subsection in section.subsections.all %}
+            <li><a class="dropdown-item" href="{{ subsection.link }}">{{ subsection.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
+
