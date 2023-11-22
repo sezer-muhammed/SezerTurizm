@@ -140,8 +140,11 @@ class Image(models.Model):
         user = 'sezer-muhammed'
         repo = 'SezerTurizm'
         branch = 'main'
-        file_path = os.path.join('SezerTurizm/media/sections', os.path.basename(self.image.path))
-        raw_url = f'https://raw.githubusercontent.com/{user}/{repo}/{branch}/{file_path}'
+        base_path = 'SezerTurizm/media'  # Base path in the GitHub repository
+        image_relative_path = self.image.url  # Relative path from MEDIA_URL
+        full_path = os.path.join(base_path, image_relative_path.lstrip('/'))
+
+        raw_url = f'https://raw.githubusercontent.com/{user}/{repo}/{branch}/{full_path}'
         self.image_url = raw_url
         super().save(*args, **kwargs)
 
