@@ -137,10 +137,11 @@ class Image(models.Model):
     image_url = models.URLField(max_length=1024, blank=True)
 
     def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
         user = 'sezer-muhammed'
         repo = 'SezerTurizm'
         branch = 'main'
-        base_path = 'SezerTurizm/media'  # Base path in the GitHub repository
+        base_path = 'SezerTurizm/'  # Base path in the GitHub repository
         image_relative_path = self.image.url  # Relative path from MEDIA_URL
         full_path = os.path.join(base_path, image_relative_path.lstrip('/'))
 
