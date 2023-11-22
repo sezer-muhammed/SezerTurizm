@@ -20,10 +20,12 @@
 <script>
   function changeLanguage(lang) {
     var currentUrl = window.location.href;
-    var newUrl = currentUrl.replace(/\/(tr|ru)\//, '/' + lang + '/');
+    var newUrl = currentUrl.replace(/(https?:\/\/[^\/]+)\/(tr|ru)(\/?.*)/, '$1/' + lang + '$3');
     window.location.href = newUrl;
   }
 </script>
+
+
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <!-- Brand -->
@@ -44,7 +46,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="{{ section.name }}-dropdown">
           <!-- Home Page section that directs to the section page -->
-          <li><a class="dropdown-item" href="{{ section.link }}">Home Page</a></li>
+          <li><a class="dropdown-item" href="{{ section.link }}">Главная страница / Ev</a></li>
           
           <!-- Divider -->
           <li><hr class="dropdown-divider"></li>
@@ -66,13 +68,11 @@
       <span class="flag-icon flag-icon-tr"></span> / <span class="flag-icon flag-icon-ru"></span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="language-dropdown">
-      <li><a class="dropdown-item" href="/tr/"><span class="flag-icon flag-icon-tr"></span> Türkçe</a></li>
-      <li><a class="dropdown-item" href="/ru/"><span class="flag-icon flag-icon-ru"></span> Русский</a></li>
+      <li><a class="dropdown-item" href="javascript:void(0);" onclick="changeLanguage('tr')"><span class="flag-icon flag-icon-tr"></span> Türkçe</a></li>
+      <li><a class="dropdown-item" href="javascript:void(0);" onclick="changeLanguage('ru')"><span class="flag-icon flag-icon-ru"></span> Русский</a></li>
     </ul>
   </li>
 </ul>
-
-
 
   </div>
 </nav>

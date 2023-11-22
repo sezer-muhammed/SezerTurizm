@@ -24,10 +24,11 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Include other non-i18n patterns here
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 urlpatterns += i18n_patterns(
     path('', include('AllPageInformations.urls')),
+    path('events/', include('AllEvents.urls')),
     # Add other i18n URL patterns here
 )

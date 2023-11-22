@@ -1,9 +1,11 @@
+import os
 from django.db import models
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
 import reversion
 import random
 from django.core.cache import cache
+import uuid
 
 class Colors(models.Model):
     primary = models.CharField(max_length=7, default='#0d6efd')  # Default Bootstrap Primary
@@ -131,6 +133,17 @@ class Image(models.Model):
     image = models.ImageField(upload_to='images/')
     caption = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    ref_name = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    image_url = models.URLField(max_length=1024, blank=True)
+
+    def save(self, *args, **kwargs):
+        user = 'sezer-muhammed'
+        repo = 'SezerTurizm'
+        branch = 'main'
+        file_path = os.path.join('SezerTurizm/media/sections', os.path.basename(self.image.path))
+        raw_url = f'https://raw.githubusercontent.com/{user}/{repo}/{branch}/{file_path}'
+        self.image_url = raw_url
+        super().save(*args, **kwargs)
 
 class BrandAwareness(models.Model):
     title = models.CharField(max_length=200)
