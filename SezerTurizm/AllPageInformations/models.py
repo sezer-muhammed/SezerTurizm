@@ -145,6 +145,9 @@ class Image(models.Model):
         full_path = os.path.join(base_path, image_relative_path.lstrip('/'))
 
         raw_url = f'https://raw.githubusercontent.com/{user}/{repo}/{branch}/{full_path}'
+
+        print(raw_url)
+
         self.image_url = raw_url
         super().save(*args, **kwargs)
 
