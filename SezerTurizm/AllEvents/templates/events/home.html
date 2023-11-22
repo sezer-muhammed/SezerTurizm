@@ -1,9 +1,11 @@
 {% extends "base.html" %}  
 
+{% load render_content %}
+
 {% block content %}
 
 {% for event in events %}
-  {{ event.html_content|safe }}
+  {% render_template_string event.html_content %}
 {% endfor %}
 
 {% endblock %}
