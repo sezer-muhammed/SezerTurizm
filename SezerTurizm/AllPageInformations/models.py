@@ -147,8 +147,6 @@ class Image(models.Model):
 
         raw_url = f'https://raw.githubusercontent.com/{user}/{repo}/{branch}/{full_path}'
 
-        print(raw_url)
-
         self.image_url = raw_url
         super().save(*args, **kwargs)
 
