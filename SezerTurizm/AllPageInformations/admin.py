@@ -54,16 +54,23 @@ class InformationalAdmin(TranslationAdmin):
     list_display = ['title', 'created_at']
     search_fields = ['title']
 
+
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ['short_ref_name', 'image', 'caption', 'created_at']
-    search_fields = ['caption']  # I've removed 'ref_name' from here for user-friendliness
-    fields = ('ref_name', 'image', 'caption', 'created_at')  # Add this line to display fields in the object page
-    readonly_fields = ('ref_name', 'created_at')  # Make ref_name and created_at read-only
+    list_display = ['caption', 'get_raw_url']
+    search_fields = ['caption']
+    fields = ('ref_name', 'image', 'caption', 'created_at')
+    readonly_fields = ('ref_name', 'created_at')
 
     def short_ref_name(self, obj):
         return str(obj.ref_name)
     short_ref_name.short_description = 'Reference Name'
+
+    def get_raw_url(self, obj):
+        return obj.image_url
+    get_raw_url.short_description = 'Raw URL'
+
+
 
 
 @admin.register(BrandAwareness)
