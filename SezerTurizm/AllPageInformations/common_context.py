@@ -7,7 +7,6 @@ def common_context(request):
     social_media_links = SocialMediaLink.objects.all()
     sections = Section.objects.prefetch_related('subsections__subsubsections').all()
     navbar_brand = NavbarBrand.objects.filter(in_use=True).last()
-    color_settings = Colors.objects.last()  # Fetch the color settings
 
     return {
         'base_footer': base_footer,
@@ -15,5 +14,4 @@ def common_context(request):
         'social_media_links': social_media_links,
         'sections': sections,
         'navbar_brand': navbar_brand,
-        'color_settings': color_settings  # Add color settings to the context
     }

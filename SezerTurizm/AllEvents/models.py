@@ -7,6 +7,7 @@ class Event(models.Model):
     location = models.CharField(max_length=255, blank=True)
     description = models.TextField()  # For a brief description or summary
     html_content = models.TextField()
+    symbolic_image_url = models.URLField(blank=True)
     subsubsection = models.ForeignKey(
         Subsubsection,
         on_delete=models.SET_NULL,

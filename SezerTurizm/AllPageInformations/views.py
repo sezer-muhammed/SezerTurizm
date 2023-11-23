@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from AllEvents.models import Event
 
 class HomeView(TemplateView):
     """Class-based view for the home page using TemplateView.
@@ -17,5 +18,5 @@ class HomeView(TemplateView):
         """
         context = super().get_context_data(**kwargs)
         # You can add additional context data here, if needed.
-
+        context["AllEvents"] = Event.objects.all().order_by('?')
         return context
