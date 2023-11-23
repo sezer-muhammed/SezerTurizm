@@ -7,6 +7,28 @@ import random
 from django.core.cache import cache
 import uuid
 
+
+class HomePageSectionTitles(models.Model):
+    section_identifier = models.SlugField(unique=True, max_length=50, help_text="Unique identifier for the section")
+    title = models.CharField(max_length=200, verbose_name="Title")
+    subtitle = models.CharField(max_length=300, blank=True, null=True, verbose_name="Subtitle")
+    display_order = models.PositiveIntegerField(help_text="Order in which the section appears on the homepage")
+    is_active = models.BooleanField(default=True, help_text="Toggle visibility of this section on the homepage")
+    creation_date = models.DateTimeField(auto_now_add=True, help_text="Timestamp when the section was created")
+    last_modified_date = models.DateTimeField(auto_now=True, help_text="Timestamp of the last modification")
+    icon_class = models.CharField(max_length=100, blank=True, null=True, help_text="Class name for the icon")
+    background_image_url = models.URLField(blank=True, null=True, help_text="URL of the background image for the section")
+    link_url = models.URLField(blank=True, null=True, help_text="URL if the section title links to another page")
+    additional_notes = models.TextField(blank=True, null=True, help_text="Any additional notes or instructions")
+
+    class Meta:
+        verbose_name = "Home Page Section Title"
+        verbose_name_plural = "Home Page Section Titles"
+        ordering = ['display_order']
+
+    def __str__(self):
+        return self.section_identifier
+
 class Colors(models.Model):
     primary = models.CharField(max_length=7, default='#0d6efd')  # Default Bootstrap Primary
     secondary = models.CharField(max_length=7, default='#6c757d')  # Default Bootstrap Secondary

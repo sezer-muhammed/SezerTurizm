@@ -3,9 +3,26 @@ from modeltranslation.admin import TranslationAdmin
 from .models import (SocialMediaPlatform, FooterMessage, BaseFooter, SocialMediaLink, 
                      Section, Subsection, Subsubsection, NavbarBrand, 
                      Informational, Image, BrandAwareness, LeadGeneration, 
-                     LocalAttractions, CustomerTestimonials)
+                     LocalAttractions, CustomerTestimonials, HomePageSectionTitles)
 from .translation import *
 # Admin classes for each model
+
+@admin.register(HomePageSectionTitles)
+class HomePageSectionTitlesAdmin(TranslationAdmin):
+    list_display = ('section_identifier', 'title', 'display_order', 'is_active', 'creation_date', 'last_modified_date')
+    list_filter = ('is_active', 'creation_date')
+    search_fields = ('section_identifier', 'title')
+    prepopulated_fields = {'section_identifier': ('title',)}
+    ordering = ('display_order',)
+    fieldsets = (
+        (None, {
+            'fields': ('section_identifier', 'title', 'subtitle', 'display_order', 'is_active')
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('icon_class', 'background_image_url', 'link_url', 'additional_notes'),
+        }),
+    )
 
 @admin.register(SocialMediaPlatform)
 class SocialMediaPlatformAdmin(TranslationAdmin):

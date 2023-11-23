@@ -2,7 +2,11 @@ from modeltranslation.translator import register, TranslationOptions
 from .models import (SocialMediaPlatform, FooterMessage, BaseFooter, 
                      Section, Subsection, Subsubsection, NavbarBrand, 
                      Informational, BrandAwareness, LeadGeneration, 
-                     LocalAttractions, CustomerTestimonials)
+                     LocalAttractions, CustomerTestimonials, HomePageSectionTitles)
+
+@register(HomePageSectionTitles)
+class HomePageSectionTitlesTranslationOptions(TranslationOptions):
+    fields = ('title', 'subtitle') 
 
 @register(SocialMediaPlatform)
 class SocialMediaPlatformTranslationOptions(TranslationOptions):
