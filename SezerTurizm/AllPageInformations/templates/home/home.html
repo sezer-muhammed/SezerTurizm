@@ -28,17 +28,42 @@
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper('.mySwiper', {
-            slidesPerView: 4,
-            spaceBetween: 40,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
+          // Default parameters for all breakpoints
+          slidesPerView: 1,
+          spaceBetween: 10,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          // Enable mousewheel control
+          mousewheel: true,
+          // Enable dragging
+          grabCursor: true,
+      
+          // Responsive breakpoints
+          breakpoints: {
+            // when window width is >= 320px
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 10
             },
-            // Enable mousewheel control
-            mousewheel: true,
-            // Enable dragging
-            grabCursor: true,
+            // when window width is >= 480px
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 20
+            },
+            // when window width is >= 640px
+            640: {
+              slidesPerView: 3,
+              spaceBetween: 30
+            },
+            // when window width is >= 992px
+            992: {
+              slidesPerView: 4,
+              spaceBetween: 40
+            }
+          }
         });
-    </script>
+      </script>
 </section>
 {% endblock %}
